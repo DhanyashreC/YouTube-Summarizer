@@ -8,6 +8,7 @@ import {
   Clock3,
   Copy,
   Download,
+  ExternalLink,
   LoaderCircle,
   AlertCircle,
   CheckCircle2,
@@ -17,7 +18,7 @@ import {
 
 import "./App.css";
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "http://localhost:8000";
 
 function App() {
   const [url, setUrl] = useState("");
@@ -30,7 +31,7 @@ function App() {
     event.preventDefault();
 
     if (!url.trim()) {
-      setError("Please paste a YouTube video link first.");
+      setError("Please paste a Video video link first.");
       return;
     }
 
@@ -68,9 +69,9 @@ function App() {
     if (!result) return "";
 
     return [
-      "YOUTUBE SUMMARIZER",
+      "Video SUMMARIZER",
       "",
-      `Video: ${result.title || "YouTube video"}`,
+      `Video: ${result.title || "Video video"}`,
       `Link: ${url}`,
       "",
       "SUMMARY",
@@ -81,7 +82,7 @@ function App() {
       "",
       "IMPORTANT TOPICS",
       ...result.topics.map(
-        (topic) => `${topic.timestamp} — ${topic.title}\n${topic.description}\n${topic.youtube_url}`
+        (topic) => `${topic.timestamp} — ${topic.title}\n${topic.description}\n${topic.Video_url}`
       ),
     ].join("\n");
   }
@@ -102,7 +103,7 @@ function App() {
     const downloadUrl = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = downloadUrl;
-    link.download = "youtube-summary.txt";
+    link.download = "Video-summary.txt";
     link.click();
     URL.revokeObjectURL(downloadUrl);
   }
@@ -118,11 +119,11 @@ function App() {
   return (
     <div className="app">
       <header className="navbar">
-        <a className="brand" href="#home" aria-label="YouTube Summarizer home">
+        <a className="brand" href="#home" aria-label="Video Summarizer home">
           <span className="brand-icon">
             <Video size={25} />
           </span>
-          <span>YouTube<span className="brand-accent">Summarizer</span></span>
+          <span>Video<span className="brand-accent">Summarizer</span></span>
         </a>
         <a className="nav-link" href="#features">Features</a>
       </header>
@@ -141,7 +142,7 @@ function App() {
           </h1>
 
           <p className="hero-description">
-            Turn long YouTube videos into concise summaries, useful takeaways,
+            Turn long Video videos into concise summaries, useful takeaways,
             and timestamped notes in seconds.
           </p>
 
@@ -152,8 +153,8 @@ function App() {
                 type="url"
                 value={url}
                 onChange={(event) => setUrl(event.target.value)}
-                placeholder="Paste your YouTube video link here..."
-                aria-label="YouTube video URL"
+                placeholder="Paste your Video video link here..."
+                aria-label="Video video URL"
                 required
               />
               {url && (
@@ -230,30 +231,30 @@ function App() {
             <div className="video-card">
               <a
                 className="thumbnail-link"
-                href={`https://www.youtube.com/watch?v=${result.video_id}`}
+                href={`https://www.Video.com/watch?v=${result.video_id}`}
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Open original YouTube video"
+                aria-label="Open original Video video"
               >
                 <img
                   className="thumbnail"
                   src={result.thumbnail_url}
-                  alt="YouTube video thumbnail"
+                  alt="Video video thumbnail"
                 />
                 <span className="play-overlay">
-                  <Youtube size={28} />
+                  <Video size={28} />
                 </span>
               </a>
               <div className="video-details">
                 <span className="content-label">VIDEO OVERVIEW</span>
-                <h3>{result.title || "Your YouTube video"}</h3>
+                <h3>{result.title || "Your Video video"}</h3>
                 <a
-                  href={`https://www.youtube.com/watch?v=${result.video_id}`}
+                  href={`https://www.Video.com/watch?v=${result.video_id}`}
                   target="_blank"
                   rel="noreferrer"
                   className="original-link"
                 >
-                  Watch on YouTube <ExternalLink size={14} />
+                  Watch on Video <ExternalLink size={14} />
                 </a>
               </div>
             </div>
@@ -317,7 +318,7 @@ function App() {
                     <a
                       className="topic-item"
                       key={`${index}-${topic.timestamp_seconds}`}
-                      href={topic.youtube_url}
+                      href={topic.Video_url}
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -362,7 +363,7 @@ function App() {
       <footer className="footer">
         <a className="brand footer-brand" href="#home">
          <span className="brand-icon"><Video size={22} /></span>
-          <span>YouTube<span className="brand-accent">Summarizer</span></span>
+          <span>Video<span className="brand-accent">Summarizer</span></span>
         </a>
         <p>Spend less time watching. More time learning.</p>
       </footer>
